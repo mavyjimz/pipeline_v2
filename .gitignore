@@ -1,0 +1,9 @@
+# Data Safety
+input_data/raw/creditcard.csv
+input_data/processed/
+logs/*.log
+
+# Environment Safety
+venv/
+.venv/
+__pycache__/
