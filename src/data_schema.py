@@ -3,7 +3,7 @@ from typing import List
 
 class CreditCardSchema(BaseModel):
     """
-    The 'Data Contract' for Credit Card Transactions.
+    The Data Contract for Credit Card Transactions.
     Ensures strict validation at the pipeline entrance.
     """
     Time: float
@@ -20,9 +20,9 @@ class CreditCardSchema(BaseModel):
         return v
 
 class TransactionBatch(BaseModel):
+    """Handles bulk validation of multiple rows"""
     transactions: List[CreditCardSchema]
 
-# --- SELF-TEST BLOCK ---
 if __name__ == "__main__":
     print("--- RUNNING SCHEMA SELF-TEST ---")
     try:
@@ -31,7 +31,7 @@ if __name__ == "__main__":
         CreditCardSchema(**valid_data)
         print("TEST 1 PASSED: Valid data accepted.")
 
-        # Test 2: Invalid Data (Negative Amount)
+        # Test 2: Invalid Data
         print("TEST 2: Testing Negative Amount (Should fail)...")
         invalid_data = {"Time": 0.0, "V1": 1.1, "V2": -1.1, "Amount": -50.0, "Class": 0}
         CreditCardSchema(**invalid_data)
